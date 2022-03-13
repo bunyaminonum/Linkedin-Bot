@@ -7,7 +7,8 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 class LinkedinBot():
-    def __init__(self,search):
+    def __init__(self,search, pageNum):
+        self.pageNum = pageNum
         self.link = 'https://www.linkedin.com/login'
         self.search = search
         self.empList = []
@@ -32,7 +33,7 @@ class LinkedinBot():
         id.submit()
 
         driver.implicitly_wait(10)
-        Num = [i for i in range(25, 26, 25)]
+        Num = [i for i in range(25, self.pageNum + 1, 25)]
         for num in Num:
             self.link = f'https://www.linkedin.com/jobs/search/?keywords={self.search}&start={num}'
             print(num)
@@ -47,7 +48,7 @@ class LinkedinBot():
             print(linkList)
             filteredlinkList_ = self.linkParser(linkList)
             driver.implicitly_wait(10)
-            print(len(filteredlinkList_))
+            # print(len(filteredlinkList_))
             try:
                 for j in filteredlinkList_:
                     driver.get(j)
@@ -60,7 +61,7 @@ class LinkedinBot():
 
                     changeToTextList = str(employee.text).split()
                     self.empList.append(changeToTextList[0])
-                    print(self.empList)
+                    # print(self.empList)
             except:
                 continue
 
@@ -120,8 +121,17 @@ class LinkedinBot():
                 continue
         return floatList
 
+while True:
+    job = input('Write the name of the profession you want to search: ')
+    page_num = int(input('enter number of page: '))
+
+    if page_num % 25 == 0:
+        bot = LinkedinBot(job, page_num)
+        print(bot.avarage)
+
+    else:
+        print('yeniden dene')
+        continue
 
 
-bot = LinkedinBot('java developer')
-print(bot.avarage)
 

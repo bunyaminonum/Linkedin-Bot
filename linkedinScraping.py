@@ -19,7 +19,6 @@ def parserList(list):
         newList.append(li)
     return  newList
 
-
 def splitAndCheckNum(list_:list):
     newList = []
     for i in list_:
