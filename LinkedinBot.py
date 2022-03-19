@@ -7,10 +7,12 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 class LinkedinBot():
-    def __init__(self,search, pageNum):
+    def __init__(self,search, pageNum, email, password):
         self.pageNum = pageNum
         self.link = 'https://www.linkedin.com/login'
         self.search = search
+        self.email = email
+        self.password = password
         self.empList = []
         self.pList = []
         self.sepList = []
@@ -25,15 +27,15 @@ class LinkedinBot():
         driver.implicitly_wait(10)
 
         id = driver.find_element_by_id('username')
-        id.send_keys('19701023@mersin.edu.tr')
+        id.send_keys(self.email)
 
         id = driver.find_element_by_id('password')
         # login = driver.find_element_by_xpath('//*[@id="join-form-submit"]')
-        id.send_keys('mardin47')
+        id.send_keys(self.password)
         id.submit()
 
         driver.implicitly_wait(10)
-        Num = [i for i in range(25, self.pageNum + 1, 25)]
+        Num = [num for num in range(25, self.pageNum*25 + 1, 25)]
         for num in Num:
             self.link = f'https://www.linkedin.com/jobs/search/?keywords={self.search}&start={num}'
             print(num)
@@ -53,25 +55,27 @@ class LinkedinBot():
                 for j in filteredlinkList_:
                     driver.get(j)
                     time.sleep(3)
-                    employee = driver.find_element_by_css_selector(
-                        'body > div.application-outlet > div.authentication-outlet >'
-                        ' div > div.job-view-layout.jobs-details > div.grid > div >'
-                        ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
-                        ' ul > li:nth-child(2) > span')
-
+                    try:
+                        employee = driver.find_element_by_css_selector(
+                            'body > div.application-outlet > div.authentication-outlet >'
+                            ' div > div.job-view-layout.jobs-details > div.grid > div >'
+                            ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
+                            ' ul > li:nth-child(2) > span')
+                    except:
+                        continue
                     changeToTextList = str(employee.text).split()
                     self.empList.append(changeToTextList[0])
-                    # print(self.empList)
-            except:
+                    print(changeToTextList[0])
+            except TimeoutException:
                 continue
 
         self.sepList = self.parserList(self.empList)
-        print('************')
-        print(self.sepList)
-        print('*****************')
+        # print('************')
+        # print(self.sepList)
+        # print('*****************')
         self.pList = self.splitAndCheckNum(self.sepList)
-        print(self.pList)
-        self.emoListt = self.toFloat(self.pList)
+        # print(self.pList)
+        # self.emoListt = self.toFloat(self.pList)
         self.tofloat = self.toFloat(self.emoListt)
         self.avarage = self.getAvarage(self.tofloat)
         # print(se)
@@ -100,8 +104,11 @@ class LinkedinBot():
         return newList
 
     def getAvarage(self, floatList):
-        avarage = (sum(floatList) / len(floatList)) / 2
-        return avarage
+        try:
+            avarage = (sum(floatList) / len(floatList)) / 2
+            return avarage
+        except ZeroDivisionError:
+            return 0
 
     def linkParser(self, linkList):
         newList = []
@@ -121,17 +128,11 @@ class LinkedinBot():
                 continue
         return floatList
 
-while True:
-    job = input('Write the name of the profession you want to search: ')
-    page_num = int(input('enter number of page: '))
+job = input('job: ')
+page_num = int(input('page of number'))
+bot = LinkedinBot(job, page_num, '19701023@mersin.edu.tr', 'mardin47')
+print(bot.avarage)
 
-    if page_num % 25 == 0:
-        bot = LinkedinBot(job, page_num)
-        print(bot.avarage)
-
-    else:
-        print('yeniden dene')
-        continue
 
 
 
