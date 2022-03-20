@@ -8,7 +8,7 @@ import time
 from LinkedinBot_Login import Login
 from LinkedinBot_data_manipulation import Manipulation as mn
 class search(Login):
-    def __init__(self, email, password, search = 'data engineer', pageNum = 1):
+    def __init__(self, email:str, password:str, search = 'data engineer', pageNum = 1):
         super().__init__(email, password)
         self.search = search
         self.pageNum = pageNum
@@ -56,12 +56,12 @@ class search(Login):
         # print('*****************')
         self.pList = mn.splitAndCheckNum(self.sepList)
         # print(self.pList)
-        self.emoListt = self.toFloat(self.pList)
+        self.emoListt = mn.toFloat(self.pList)
         self.toFloatList = mn.toFloat(self.emoListt)
         self.avarage = mn.getAvarage(self.toFloatList)
         # print(se)
-        # return self.avarage
-        return self.empList
+
 
 a = search('19701023@mersin.edu.tr', 'mardin47', 'data engineer', 1)
-
+print(a.avarage)
+1

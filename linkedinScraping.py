@@ -1,3 +1,4 @@
+from Functions import Functions
 import requests
 from bs4 import BeautifulSoup
 import selenium
@@ -7,7 +8,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 
-def parserList(list:list) -> list:
+def parserList(list):
     newList = []
     print(list)
     for li in list:
@@ -18,7 +19,7 @@ def parserList(list:list) -> list:
         newList.append(li)
     return  newList
 
-def splitAndCheckNum(list_:list) -> list:
+def splitAndCheckNum(list_:list):
     newList = []
     for i in list_:
         splt = str(i).split('-')
