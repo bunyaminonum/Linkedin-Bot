@@ -23,6 +23,6 @@ class Login:
         id.send_keys(self.password)
         id.submit()
 
-
+# l = Login('19701023@mersin.edu.tr', 'mardin')
 
 

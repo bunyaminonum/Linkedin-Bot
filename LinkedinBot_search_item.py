@@ -32,7 +32,7 @@ class Search(Login):
             try:
                 for j in filteredlinkList_:
                     self.driver.get(j)
-                    time.sleep(3)
+                    time.sleep(2.5)
                     try:
                         employee = self.driver.find_element_by_css_selector(
                             'body > div.application-outlet > div.authentication-outlet >'
@@ -53,5 +53,5 @@ class Search(Login):
         self.avarage = mn.getAvarage(self.toFloatList)
 
 
-# a = Search('19701023@mersin.edu.tr', 'mardin47', '.Net Developer', 1)
+# a = Search('19701023@mersin.edu.tr', 'mardin47', 'project manager', 1)
 # print(a.avarage)
