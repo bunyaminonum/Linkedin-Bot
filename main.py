@@ -1,6 +1,5 @@
-import warnings
 from LinkedinBot_search_item import Search
-warnings.filterwarnings("ignore")
+
 while True:
     try:
         email = input('enter e-mail: ')

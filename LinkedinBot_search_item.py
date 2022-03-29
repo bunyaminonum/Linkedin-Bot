@@ -16,6 +16,8 @@ class Search(Login):
         self.toFloatList = []
         self.linkList = []
         self.avarage = 0
+
+
         Num = [num for num in range(25, self.pageNum * 25 + 1, 25)]
         for num in Num:
             self.link = f'https://www.linkedin.com/jobs/search/?keywords={self.search}&start={num}'
