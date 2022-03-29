@@ -1,4 +1,3 @@
-
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -56,6 +55,7 @@ class Search(Login):
         self.emoListt = mn.toFloat(self.pList)
         self.toFloatList = mn.toFloat(self.emoListt)
         self.avarage = mn.getAvarage(self.toFloatList)
+
 
 
 # a = Search('19701023@mersin.edu.tr', 'mardin47', 'project manager', 1)
