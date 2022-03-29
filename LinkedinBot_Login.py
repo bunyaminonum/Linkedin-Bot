@@ -1,5 +1,4 @@
-import requests
-from bs4 import BeautifulSoup
+
 import selenium
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager

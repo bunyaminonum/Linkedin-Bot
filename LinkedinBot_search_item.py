@@ -1,13 +1,10 @@
+import time
 import requests
 from bs4 import BeautifulSoup
-import selenium
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
-import time
+import LinkedinBot_Login
 from LinkedinBot_Login import Login
 from LinkedinBot_data_manipulation import Manipulation as mn
-class search(Login):
+class Search(Login):
     def __init__(self, email:str, password:str, search = 'data engineer', pageNum = 1):
         super().__init__(email, password)
         self.search = search
@@ -32,7 +29,6 @@ class search(Login):
             print(self.linkList)
             filteredlinkList_ = mn.linkParser(self.linkList)
             self.driver.implicitly_wait(10)
-            # print(len(filteredlinkList_))
             try:
                 for j in filteredlinkList_:
                     self.driver.get(j)
@@ -48,20 +44,14 @@ class search(Login):
                     changeToTextList = str(employee.text).split()
                     self.empList.append(changeToTextList[0])
                     print(changeToTextList[0])
-            except TimeoutException:
+            except TimeoutError:
                 continue
         self.sepList = mn.parserList(self.empList)
-        # print('************')
-        # print(self.sepList)
-        # print('*****************')
         self.pList = mn.splitAndCheckNum(self.sepList)
-        # print(self.pList)
         self.emoListt = mn.toFloat(self.pList)
         self.toFloatList = mn.toFloat(self.emoListt)
         self.avarage = mn.getAvarage(self.toFloatList)
-        # print(se)
 
 
-a = search('19701023@mersin.edu.tr', 'mardin47', 'data engineer', 1)
-print(a.avarage)
-1
+# a = Search('19701023@mersin.edu.tr', 'mardin47', '.Net Developer', 1)
+# print(a.avarage)

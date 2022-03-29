@@ -1,12 +1,13 @@
-from LinkedinBot import LinkedinBot
+from LinkedinBot_search_item import Search
 while True:
-    job = input('Write the name of the profession you want to search: ')
-    page_num = int(input('enter number of page: '))
-
-    if page_num % 25 == 0:
-        bot = LinkedinBot(job, page_num)
-        print(bot.avarage)
+    try:
+        email = input('enter e-mail: ')
+        password = input('enter password: ')
+        job_name = input('job name')
+        num_page = int(input('name of page'))
+        a = Search(email, password, job_name, num_page)
+        print(a.avarage)
         break
-    else:
-        print('yeniden dene')
+    except:
+        print('wrong input! try again...')
         continue
