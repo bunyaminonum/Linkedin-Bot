@@ -37,11 +37,13 @@ class Search(Login):
                     self.driver.get(j)
                     time.sleep(2.5)
                     try:
-                        employee = self.driver.find_element_by_css_selector(
-                            'body > div.application-outlet > div.authentication-outlet >'
-                            ' div > div.job-view-layout.jobs-details > div.grid > div >'
-                            ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
-                            ' ul > li:nth-child(2) > span')
+                        # employee = self.driver.find_element_by_css_selector(
+                        #     'body > div.application-outlet > div.authentication-outlet >'
+                        #     ' div > div.job-view-layout.jobs-details > div.grid > div >'
+                        #     ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
+                        #     ' ul > li:nth-child(2) > span')
+                        employee = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/ul/li[2]/span')
+
                     except:
                         continue
                     changeToTextList = str(employee.text).split()
