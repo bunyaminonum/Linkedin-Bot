@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import LinkedinBot_Login
 from LinkedinBot_Login import Login
 from LinkedinBot_data_manipulation import Manipulation as mn
+
 class Search(Login):
     def __init__(self, email:str, password:str, search = 'data engineer', pageNum = 1):
         super().__init__(email, password)
@@ -16,11 +17,10 @@ class Search(Login):
         self.linkList = []
         self.avarage = 0
 
-
         Num = [num for num in range(25, self.pageNum * 25 + 1, 25)]
         for num in Num:
             self.link = f'https://www.linkedin.com/jobs/search/?keywords={self.search}&start={num}'
-            print(num)
+            print(f"num of job posting: {num}")
             self.driver.get(self.link)
 
             r = requests.get(self.link)
@@ -28,19 +28,22 @@ class Search(Login):
             Url = soup.findAll('a')
             for url in Url:
                 self.linkList.append(url.get('href'))
-            print(self.linkList)
             filteredlinkList_ = mn.linkParser(self.linkList)
             self.driver.implicitly_wait(10)
             try:
-                for j in filteredlinkList_:
-                    self.driver.get(j)
-                    time.sleep(2.5)
+                for link in filteredlinkList_:
+                    self.driver.get(link)
+                    time.sleep(2)
                     try:
-                        # employee = self.driver.find_element_by_css_selector(
-                        #     'body > div.application-outlet > div.authentication-outlet >'
-                        #     ' div > div.job-view-layout.jobs-details > div.grid > div >'
-                        #     ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
-                        #     ' ul > li:nth-child(2) > span')
+                        #alternative way for 'employee' variable ↓
+                        """
+                        employee = self.driver.find_element_by_css_selector(
+                            'body > div.application-outlet > div.authentication-outlet >'
+                            ' div > div.job-view-layout.jobs-details > div.grid > div >'
+                            ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
+                            ' ul > li:nth-child(2) > span')
+                        """
+
                         employee = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/ul/li[2]/span')
 
                     except:
@@ -56,7 +59,6 @@ class Search(Login):
         self.toFloatList = mn.toFloat(self.emoListt)
         self.avarage = mn.getAvarage(self.toFloatList)
 
-
-
-# a = Search('19701023@mersin.edu.tr', 'mardin47', 'project manager', 1)
-# print(a.avarage)
+#
+# a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 1)
+# # print(a.avarage)

@@ -3,7 +3,6 @@ import selenium
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
-import time
 
 
 class Login:
@@ -11,7 +10,15 @@ class Login:
         self.email = email
         self.password = password
         self.link =  'https://www.linkedin.com/login'
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+
+
+        options = webdriver.ChromeOptions()
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--ignore-ssl-errors')
+        options.add_argument('--disable-gpu')
+        self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options = options)
+        # self.driver = webdriver.Chrome(ChromeDriverManager().install())
+
         self.driver.get(self.link)
         self.driver.implicitly_wait(10)
 
@@ -23,6 +30,6 @@ class Login:
         id.send_keys(self.password)
         id.submit()
 
-# l = Login('19701023@mersin.edu.tr', 'mardin')
+# l = Login('19701023@mersin.edu.tr', 'mardin47')
 
 
