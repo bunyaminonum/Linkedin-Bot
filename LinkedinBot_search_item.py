@@ -58,7 +58,8 @@ class Search(Login):
         self.emoListt = mn.toFloat(self.pList)
         self.toFloatList = mn.toFloat(self.emoListt)
         self.avarage = mn.getAvarage(self.toFloatList)
+        print(self.avarage)
 
 #
-# a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 1)
+a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 1)
 # # print(a.avarage)
