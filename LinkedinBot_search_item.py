@@ -33,7 +33,7 @@ class Search(Login):
             try:
                 for link in filteredlinkList_:
                     self.driver.get(link)
-                    time.sleep(2)
+                    # time.sleep(0.5)
                     try:
                         #alternative way for 'employee' variable ↓
                         """
@@ -58,8 +58,8 @@ class Search(Login):
         self.emoListt = mn.toFloat(self.pList)
         self.toFloatList = mn.toFloat(self.emoListt)
         self.avarage = mn.getAvarage(self.toFloatList)
-        print(self.avarage)
 
-#
-a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 1)
-# # print(a.avarage)
+
+
+# a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 1)
+# # # print(a.avarage)
