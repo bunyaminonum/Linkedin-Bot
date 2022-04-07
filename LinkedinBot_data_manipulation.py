@@ -34,7 +34,7 @@ class Manipulation():
         newList = []
         for li in linkList:
             li2 = str(li).split('/')
-            if 'view' in li2:
+            if 'view' in li2  :
                 newList.append(li)
         return newList
 
@@ -49,3 +49,8 @@ class Manipulation():
                 continue
         return floatList
 
+    @staticmethod
+    def splitSearchItem(search):
+        list = str(search).split()
+        result = '+'.join(list).strip()
+        return result
