@@ -2,7 +2,6 @@ import time
 import selenium
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.keys import Keys
 from webdriver_manager.firefox import GeckoDriverManager
 
 
@@ -18,7 +17,7 @@ class Login:
         # options.add_argument('--ignore-ssl-errors')
         # options.add_argument('--disable-gpu')
 
-        #alternative for Firefox
+        #alternative to Firefox
         # self.driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options = options)
         # self.driver = webdriver.Chrome(ChromeDriverManager().install())
 
@@ -39,6 +38,6 @@ class Login:
         time.sleep(6)
 
 
-# l = Login('19701023@mersin.edu.tr', 'mardin47')
+l = Login('19701023@mersin.edu.tr', 'mardin47')
 
 

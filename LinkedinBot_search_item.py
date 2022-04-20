@@ -72,5 +72,6 @@ class Search(Login):
 
 
 
-a =Search('your email address', 'your password', 'job name', "number of page", geoID=101282230)
+a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 2, geoID=101282230)
+# a =Search('your email address', 'your password', 'job name', "number of page", geoID=101282230)
 print(a.average)
