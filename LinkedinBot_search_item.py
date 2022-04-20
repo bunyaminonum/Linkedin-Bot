@@ -61,7 +61,7 @@ class Search(Login):
                         continue
                     convertToTextList = str(employee).split()
                     self.empList.append(convertToTextList[0])
-                    print(f'{title}: {convertToTextList[0]}')
+                    print(f'{company_name} ,{title}: {convertToTextList[0]}')
             except TimeoutError:
                 continue
         self.sepList = mn.parserList(self.empList)
@@ -72,5 +72,5 @@ class Search(Login):
 
 
 
-a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 2, geoID=101282230)
+a =Search('your email address', 'your password', 'job name', "number of page", geoID=101282230)
 print(a.average)
