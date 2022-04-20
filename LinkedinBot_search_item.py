@@ -8,7 +8,7 @@ from selenium import webdriver
 from webdriver_manager.firefox import GeckoDriverManager
 
 class Search(Login):
-    def __init__(self, email:str, password:str, search = 'data engineer', pageNum = 1):
+    def __init__(self, email:str, password:str, search = 'data engineer', pageNum = 1, geoID = 102105699):
         super().__init__(email, password)
         self.search = mn.splitSearchItem(search)
         self.pageNum = pageNum
@@ -18,40 +18,32 @@ class Search(Login):
         self.toFloatList = []
         self.linkList = []
         self.average = 0
-
+        self.geoID = geoID
         Num = [num for num in range(0, self.pageNum * 25 + 1, 25)]
         for num in Num:
-            # self.driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
             self.linkList = []
-            self.link = f'https://www.linkedin.com/jobs/search/?geoId=102105699&keywords={self.search}&start={num}'
-            print(self.link)
-            # print(self.linkList)
-            print(f"num of job posting: {num}")
+            self.link = f'https://www.linkedin.com/jobs/search/?geoId={self.geoID}&keywords={self.search}&start={num}'
+            # print(self.link)
+            # print(f"num of job posting: {num}")
             self.driver.get(self.link)
-
-            # r = requests.get(self.link)
-            # soup = BeautifulSoup(r.content, 'html.parser')
-            # Url = soup.findAll('a')
             a = 1
 
-            for number,a in enumerate(self.driver.find_elements_by_xpath('.//a')):
-                Url = a.get_attribute('href')
-                self.linkList.append(Url)
+            try:
+                for number,a in enumerate(self.driver.find_elements_by_xpath('.//a')):
+                    Url = a.get_attribute('href')
+                    self.linkList.append(Url)
+            except:
+                print('bound wrong when searching link')
+                continue
 
-
-            # for number, url in enumerate(Url):
-            #     self.linkList.append(url.get('href'))
-
-            # print(self.linkList)
             filteredlinkList_ = mn.linkParser(self.linkList)
-            for i in filteredlinkList_:
-                print(i)
-            # print(filteredlinkList_)
+            # for i in filteredlinkList_:
+            #     print(i)
+
             self.driver.implicitly_wait(10)
             try:
                 for link in filteredlinkList_:
                     self.driver.get(link)
-                    # time.sleep(0.5)
                     try:
                         #alternative way for 'employee' variable ↓
                         """
@@ -61,14 +53,15 @@ class Search(Login):
                             ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
                             ' ul > li:nth-child(2) > span')
                         """
-                        company_name = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/h1')
-                        employee = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/ul/li[2]/span')
+                        title = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/h1').text
+                        employee = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/ul/li[2]/span').text
+                        company_name = self.driver.find_element_by_class_name('jobs-unified-top-card__company-name').text
 
                     except:
                         continue
-                    changeToTextList = str(employee.text).split()
-                    self.empList.append(changeToTextList[0])
-                    print(f'{company_name.text}: {changeToTextList[0]}')
+                    convertToTextList = str(employee).split()
+                    self.empList.append(convertToTextList[0])
+                    print(f'{title}: {convertToTextList[0]}')
             except TimeoutError:
                 continue
         self.sepList = mn.parserList(self.empList)
@@ -79,5 +72,5 @@ class Search(Login):
 
 
 
-a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 2)
+a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 2, geoID=101282230)
 print(a.average)

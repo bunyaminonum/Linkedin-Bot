@@ -54,3 +54,5 @@ class Manipulation():
         list = str(search).split()
         result = '+'.join(list).strip()
         return result
+
+
