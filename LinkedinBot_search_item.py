@@ -26,8 +26,8 @@ class Search(Login):
             # print(self.link)
             # print(f"num of job posting: {num}")
             self.driver.get(self.link)
-            a = 1
-
+            # a = 1
+            time.sleep(3)
             try:
                 for number,a in enumerate(self.driver.find_elements_by_xpath('.//a')):
                     Url = a.get_attribute('href')
@@ -37,22 +37,12 @@ class Search(Login):
                 continue
 
             filteredlinkList_ = mn.linkParser(self.linkList)
-            # for i in filteredlinkList_:
-            #     print(i)
 
             self.driver.implicitly_wait(10)
             try:
                 for link in filteredlinkList_:
                     self.driver.get(link)
                     try:
-                        #alternative way for 'employee' variable ↓
-                        """
-                        employee = self.driver.find_element_by_css_selector(
-                            'body > div.application-outlet > div.authentication-outlet >'
-                            ' div > div.job-view-layout.jobs-details > div.grid > div >'
-                            ' div:nth-child(1) > div > div.p5 > div.mt5.mb2 >'
-                            ' ul > li:nth-child(2) > span')
-                        """
                         title = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/h1').text
                         employee = self.driver.find_element_by_xpath('/html/body/div[6]/div[3]/div/div[1]/div[1]/div/div[1]/div/div[2]/div[2]/ul/li[2]/span').text
                         company_name = self.driver.find_element_by_class_name('jobs-unified-top-card__company-name').text
@@ -72,6 +62,6 @@ class Search(Login):
 
 
 
-a =Search('19701023@mersin.edu.tr', 'mardin47', 'full stack developer', 2, geoID=101282230)
+a =Search('19701023@mersin.edu.tr', 'mardin47', 'big data engineer', 3, geoID=101282230)
 # a =Search('your email address', 'your password', 'job name', "number of page", geoID=101282230)
 print(a.average)
