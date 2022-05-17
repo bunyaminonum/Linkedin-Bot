@@ -3,6 +3,9 @@
  ## Description
 This bot searches for a job posting you specify on LinkedIn and adds the number of employees of the company that posted that job posting to a list and averages it.
 
+## Points To Be Considered!
+Your LinkedIn account must be a previously logged in account on the same device, otherwise the bot will not work properly.
+
 ## Required Modules
 * time
 * requests
