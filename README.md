@@ -42,11 +42,12 @@ Your LinkedIn account must be a previously logged in account on the same device,
 
   
 ## Usage/Examples
+* Turkey ID is given to the default geoID. If you wish, you can use the geoID of the region you are in by manually searching on LinkedIn.
 
 ```python
 from LinkedinBot_search_item import Search
 def main():
-    search = Search('enter_your_email', 'enter_your_password', 'enter_your_job_name', 'enter_num_page')
+    search = Search('enter_your_email', 'enter_your_password', 'enter_your_job_name', 'enter_num_page', geoID = 102105699)
     print(f"avarage: {search.average}")
 
 if __name__ == '__main__':
