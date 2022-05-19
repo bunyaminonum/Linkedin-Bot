@@ -61,7 +61,3 @@ class Search(Login):
         self.average = mn.getAvarage(self.toFloatList)
 
 
-
-a =Search('19701023@mersin.edu.tr', 'mardin47', 'big data engineer', 3, geoID=101282230)
-# a =Search('your email address', 'your password', 'job name', "number of page", geoID=101282230)
-print(a.average)
