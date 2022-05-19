@@ -38,6 +38,4 @@ class Login:
         time.sleep(6)
 
 
-#login1 = Login('19701023@mersin.edu.tr', 'mardin47')
-
 
