@@ -59,5 +59,5 @@ class Search(Login):
         self.emoListt = mn.toFloat(self.pList)
         self.toFloatList = mn.toFloat(self.emoListt)
         self.average = mn.getAvarage(self.toFloatList)
-
-
+search = Search('19701023@mersin.edu.tr', 'mardin47', 'php developer', 1)
+print(search.average)

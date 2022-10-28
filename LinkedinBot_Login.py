@@ -36,6 +36,4 @@ class Login:
 
         id.submit()
         time.sleep(6)
-
-
-
+new = Login('19701023@mersin.edu.tr', '19074747fb')
